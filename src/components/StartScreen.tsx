@@ -62,9 +62,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStartGame, isTransitioning 
         <div className="w-full max-w-md text-center">
           {/* Title */}
           <div className="mb-12">
-            <h1 className="text-7xl font-black mb-4 neon-text bg-gradient-to-r from-cyan-400 via-green-300 to-cyan-400 bg-clip-text text-transparent animate-pulse tracking-wide" {
-              
-            }">
+            <h1 className="text-7xl font-black mb-4 neon-text bg-gradient-to-r from-cyan-400 via-green-300 to-cyan-400 bg-clip-text text-transparent animate-pulse tracking-wide">
               SHOTIFY
             </h1>
             <p className="text-lg font-medium text-gray-300 mb-2">
