@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "49e97048-94fa-4f1b-83c3-3917a1604c09"
+      }
+    },
+    "android": {
+      "package": "com.jonyrey.vitereacttypescriptstarter"
+    }
+  }
+}
