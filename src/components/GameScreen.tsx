@@ -3,25 +3,21 @@ import { Player, Question, GameMode } from '../types';
 import { questions } from '../data/questions';
 import QuestionCard from './QuestionCard';
 import PlayerList from './PlayerList';
-import Scoreboard from './Scoreboard';
-import { Shuffle, RotateCcw, Dices, Trophy } from 'lucide-react';
+import { Shuffle, RotateCcw, Settings, Dices } from 'lucide-react';
 
 interface GameScreenProps {
   players: Player[];
-  gameMode: GameMode;
   onBack: () => void;
   onUpdatePlayers: (players: Player[]) => void;
-  isEntering?: boolean;
 }
 
-const GameScreen: React.FC<GameScreenProps> = ({ players, gameMode: initialGameMode, onBack, onUpdatePlayers, isEntering = false }) => {
+const GameScreen: React.FC<GameScreenProps> = ({ players, onBack, onUpdatePlayers }) => {
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
-  const [gameMode, setGameMode] = useState<GameMode>(initialGameMode);
+  const [gameMode, setGameMode] = useState<GameMode>('questions');
   const [usedQuestions, setUsedQuestions] = useState<Set<number>>(new Set());
   const [showCard, setShowCard] = useState(false);
   const [gamePlayers, setGamePlayers] = useState(players);
-  const [showScoreboard, setShowScoreboard] = useState(false);
 
   const currentPlayer = gamePlayers[currentPlayerIndex];
 
@@ -93,9 +89,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ players, gameMode: initialGameM
   }, []);
 
   return (
-    <div className={`min-h-screen p-4 transition-all duration-1000 ${
-      isEntering ? 'opacity-0 scale-95 blur-sm' : 'opacity-100 scale-100 blur-0'
-    }`}>
+    <div className="min-h-screen p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
@@ -107,14 +101,6 @@ const GameScreen: React.FC<GameScreenProps> = ({ players, gameMode: initialGameM
           </button>
           
           <div className="flex gap-3">
-            <button
-              onClick={() => setShowScoreboard(true)}
-              className="bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-400 hover:to-orange-500 px-4 py-2 rounded-xl text-white font-semibold transition-all duration-300 hover:shadow-[0_0_25px_rgba(251,191,36,0.5)] flex items-center gap-2"
-            >
-              <Trophy className="w-4 h-4" />
-              RANKING
-            </button>
-            
             <button
               onClick={() => setGameMode(gameMode === 'questions' ? 'yo_nunca' : 'questions')}
               className={`px-4 py-2 rounded-xl font-semibold transition-all duration-300 ${
@@ -204,13 +190,6 @@ const GameScreen: React.FC<GameScreenProps> = ({ players, gameMode: initialGameM
           </div>
         </div>
       </div>
-      
-      {/* Scoreboard Modal */}
-      <Scoreboard 
-        players={gamePlayers}
-        isVisible={showScoreboard}
-        onClose={() => setShowScoreboard(false)}
-      />
     </div>
   );
 };

@@ -12,4 +12,4 @@ export interface Question {
 }
 
 export type GameMode = 'questions' | 'yo_nunca';
-export type GamePhase = 'mode_selection' | 'setup' | 'playing';
+export type GamePhase = 'setup' | 'playing';

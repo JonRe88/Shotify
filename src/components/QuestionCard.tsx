@@ -61,7 +61,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question, isVisible }) => {
 
   return (
     <div className={`transform transition-all duration-700 ${isVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}>
-      <div className="backdrop-blur-lg bg-black/40 border-4 border-transparent rounded-3xl p-8 relative overflow-hidden group hover:scale-105 transition-all duration-500">
+      <div className="backdrop-blur-lg bg-black/20 border-2 border-transparent rounded-3xl p-8 relative overflow-hidden group hover:scale-105 transition-all duration-500">
         {/* Animated border gradient */}
         <div className={`absolute inset-0 bg-gradient-to-r ${getCategoryColor()} rounded-3xl opacity-50 blur-sm group-hover:opacity-80 transition-opacity duration-300`}></div>
         <div className="absolute inset-[2px] bg-black/80 rounded-3xl"></div>

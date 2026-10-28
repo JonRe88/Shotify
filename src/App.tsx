@@ -4,35 +4,16 @@ import StartScreen from './components/StartScreen';
 import GameScreen from './components/GameScreen';
 
 function App() {
-  const [gamePhase, setGamePhase] = useState<GamePhase>('mode_selection');
+  const [gamePhase, setGamePhase] = useState<GamePhase>('setup');
   const [players, setPlayers] = useState<Player[]>([]);
-  const [gameMode, setGameMode] = useState<GameMode>('questions');
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const startGame = (newPlayers: Player[], selectedMode: GameMode) => {
-    setIsTransitioning(true);
-    
-    setTimeout(() => {
-      setPlayers(newPlayers);
-      setGameMode(selectedMode);
-      setGamePhase('playing');
-      
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 100);
-    }, 500);
+  const startGame = (newPlayers: Player[]) => {
+    setPlayers(newPlayers);
+    setGamePhase('playing');
   };
 
   const backToSetup = () => {
-    setIsTransitioning(true);
-    
-    setTimeout(() => {
-      setGamePhase('mode_selection');
-      
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 100);
-    }, 500);
+    setGamePhase('setup');
   };
 
   const updatePlayers = (updatedPlayers: Player[]) => {
@@ -40,12 +21,12 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-blur from-cyan via-yellow-900/20 to-cyan relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-black relative overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl animate-pulse animation-delay-300"></div>
-        <div className="absolute top-3/4 left-1/2 w-32 h-32 bg-red-500/10 rounded-full blur-2xl animate-pulse animation-delay-700"></div>
+        <div className="absolute top-3/4 left-1/2 w-32 h-32 bg-yellow-500/10 rounded-full blur-2xl animate-pulse animation-delay-700"></div>
       </div>
       
       {/* Floating particles */}
@@ -66,15 +47,13 @@ function App() {
 
       {/* Content */}
       <div className="relative z-10">
-        {gamePhase === 'mode_selection' || gamePhase === 'setup' ? (
-          <StartScreen onStartGame={startGame} isTransitioning={isTransitioning} />
+        {gamePhase === 'setup' ? (
+          <StartScreen onStartGame={startGame} />
         ) : (
           <GameScreen 
             players={players} 
-            gameMode={gameMode}
             onBack={backToSetup}
             onUpdatePlayers={updatePlayers}
-            isEntering={isTransitioning}
           />
         )}
       </div>
